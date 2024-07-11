@@ -1,0 +1,23 @@
+描述
+牛牛最近学会了一些简单的数学运算
+
+请你帮他模拟一下这个运算。 （即 1+2+3....+n-1+n)
+输入描述：
+输入仅一个正整数 n 
+输出描述：
+输出和
+​
+#include<bits/stdc++.h>
+using namespace std;
+int cot(int n);
+int cot(int n){
+    if(n==1)
+    return 1;
+    return cot(n-1)+n;
+}
+int main(){
+    int n;
+    cin>>n;
+    cout<<cot(n);
+    return 0;
+}
