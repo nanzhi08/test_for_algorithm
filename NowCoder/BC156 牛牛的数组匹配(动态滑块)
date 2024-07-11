@@ -1,0 +1,45 @@
+描述
+牛牛刚学会数组不久，他拿到两个数组 a 和 b，询问 b 的哪一段连续子数组之和与数组 a 之和最接近。
+如果有多个子数组之和同样接近，输出起始点最靠左的数组。
+输入描述：
+第一行输入两个正整数 n 和 m ，表示数组 a 和 b 的长度。
+第二第三行输入 n 个和 m 个正整数，表示数组中 a 和 b 的值。
+输出描述：
+输出子数组之和最接近 a 的子数组
+
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+    int n,m;
+    cin>>n>>m;
+    int a[n],b[m];
+    int cot1=0,cot2=0;
+    int min=99999;  //设置最小值
+    for(int i=0;i<n;i++)
+    {
+        cin>>a[i];
+        cot1+=a[i];
+    }
+    for(int i=0;i<m;i++){
+        cin>>b[i];
+    }
+    int a1,b1;
+    for(int i=0;i<m;i++){
+        cot2=b[i];
+        for(int j=i+1;j<m;j++){
+            cot2+=b[j];
+            if(abs(cot1-cot2)<min)
+            {
+                min=abs(cot1-cot2);
+                a1=i;
+                b1=j;
+            }
+        }
+        }
+    for(int i=a1;i<=b1;i++)
+    {
+        cout<<b[i];
+        cout<<' ';
+    }
+    return 0;
+    }
