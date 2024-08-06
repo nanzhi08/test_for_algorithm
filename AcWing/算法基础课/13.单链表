@@ -1,0 +1,64 @@
+https://www.acwing.com/problem/content/description/828/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+const int N=100010;
+int M;
+int e[N],ne[N],head,idx;
+
+void init(){  //创建空链表
+    head=-1;
+    idx=0;
+}
+
+//向链表头插入一个数；
+void add_to_head(int k){
+    e[idx]=k;
+    ne[idx]=head;
+    head=idx;
+    idx++;  //指针移向下一位，为下一次插入元素做准备
+}
+
+//在第 k个插入的数后插入一个数。
+void add(int k,int x){
+    e[idx]=x;
+    ne[idx]=ne[k];
+    ne[k]=idx;
+    idx++;
+}
+
+//删除第𝑘个插入的数后面的一个数；
+void remove(int k){
+    ne[k]=ne[ne[k]];
+}
+
+int main(){
+    cin>>M;
+    init();
+    for(int i=0;i<M;i++){
+        char s;
+        cin>>s;
+        if(s=='H'){
+            int x;
+            cin>>x;
+            add_to_head(x);
+        }
+        if(s=='D'){
+            int k;
+            cin>>k;
+            if(k==0) head=ne[head];
+            else remove(k-1);
+        }
+        if(s=='I'){
+            int k,x;
+            cin>>k>>x;
+            add(k-1,x);
+        }
+    }
+
+    for(int i=head;i!=-1;i=ne[i])  //如果链表在初始化后仍然是空的，那么 for 循环将不会执行任何迭代，因为 head 等于 -1，不满足循环的继续条件。
+    cout<<e[i]<<' ';               //上面的循环条件中的i!=-1,这个-1是与一开始head的初始值是一样的，是一开始就定义好的初始值（特殊值）
+
+    return 0;
+}
