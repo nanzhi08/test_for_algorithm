@@ -1,0 +1,39 @@
+https://www.acwing.com/problem/content/830/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+const int N=100010;
+int stk[N];
+int tt=-1;  //用tt表示栈顶所在的索引。初始时，tt=-1。表示栈没有元素
+
+int main()
+{
+    int n;
+    scanf("%d",&n);
+    
+    while(n--){
+        string s;
+        cin>>s;
+        int x;
+        scanf("%d",&x);
+        
+        if(s=="push"){
+            stk[++tt]=x;
+        }
+        
+        else if(s=="pop"){
+            tt--;
+        }
+        
+        else if(s=="empty"){
+            printf("%s\n",tt<0 ? "YES" : "NO");
+        }
+        
+        else{
+            printf("%d\n",stk[tt]);
+        }
+    }
+    
+    return 0;
+}
