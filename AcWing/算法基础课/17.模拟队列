@@ -1,0 +1,42 @@
+https://www.acwing.com/problem/content/831/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+const int N = 100010;
+int q[N];
+int hh=0,tt=-1;
+
+void push(int x){
+    q[++tt]=x;
+}
+
+void pop(int x){
+    hh++;
+}
+
+int main()
+{
+    int m,x;
+    scanf("%d", &m);
+    string s;
+    while(m--){
+        cin>>s;
+        
+        if(s=="push"){
+            scanf("%d",&x);
+            push(x);
+        }
+        else if(s=="pop"){
+            scanf("%d",&x);
+            pop(x);
+        }
+        else if(s=="empty"){
+            printf("%s\n",tt<hh ? "YES" :"NO");
+        }
+        else{
+            printf("%d\n",q[hh]);
+        }
+    }
+    return 0;
+}
