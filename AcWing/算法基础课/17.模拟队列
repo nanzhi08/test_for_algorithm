@@ -4,39 +4,47 @@ https://www.acwing.com/problem/content/831/
 using namespace std;
 
 const int N = 100010;
-int q[N];
-int hh=0,tt=-1;
+int q[N],hh,tt;
+
+void init(){
+    hh=0,tt=-1;
+}
 
 void push(int x){
     q[++tt]=x;
 }
 
-void pop(int x){
+void pop(){
     hh++;
 }
 
 int main()
 {
-    int m,x;
-    scanf("%d", &m);
-    string s;
+    int m;
+    cin>>m;
+    
+    init();
+    
     while(m--){
+        string s;
         cin>>s;
+        int x;
         
         if(s=="push"){
-            scanf("%d",&x);
+            cin>>x;
             push(x);
         }
         else if(s=="pop"){
-            scanf("%d",&x);
-            pop(x);
+            
+            pop();
         }
         else if(s=="empty"){
-            printf("%s\n",tt<hh ? "YES" :"NO");
+            cout<<(hh>tt ? "YES" : "NO")<<endl;
         }
-        else{
-            printf("%d\n",q[hh]);
+        else if(s=="query"){
+            cout<<q[hh]<<endl;
         }
     }
+    
     return 0;
 }
