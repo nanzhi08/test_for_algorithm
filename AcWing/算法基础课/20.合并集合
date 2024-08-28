@@ -1,0 +1,35 @@
+https://www.acwing.com/problem/content/description/838/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+const int N = 100010;
+int p[N];
+
+int find(int x){
+    if(p[x]!=x)
+    p[x]=find(p[x]);  //每个集合中只有祖宗节点的p[x]值等于他本身
+    
+    return p[x];  //找到了就返回祖宗节点的值
+}
+
+int main()
+{
+    int n,m;
+    cin>>n>>m;
+    for(int i=0;i<n;i++)
+    p[i]=i;  //一开始每个节点的值都是这个点的祖宗节点
+    while(m--){
+        char c;
+        int a,b;
+        cin>>c>>a>>b;
+        if(c=='M')
+        p[find(a)]=find(b);  //集合合并
+        else
+        if(find(a)==find(b))  //集合查找
+        printf("Yes\n");
+        else 
+        printf("No\n");
+    }
+    return 0;
+}
