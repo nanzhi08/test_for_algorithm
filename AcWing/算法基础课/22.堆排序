@@ -23,7 +23,7 @@ void down(int k){
 int main()
 {
     cin>>n>>m;
-    
+
     for(int i=1;i<=n;i++){
         cin>>h[i];
     }
@@ -31,13 +31,21 @@ int main()
     for(int i=n/2;i;i--){
         down(i);
     }
-    
+
     while(m--){
         cout<<h[1]<<' ';
         h[1]=h[heap_size];
         heap_size--;
         down(1);
     }
-    
+
     return 0;
 }
+/*
+关于for(int i=n/2;i;i--){
+        down(i);
+    }  
+    这里i为什么要从n/2开始。因为从i = n / 2开始，依次向前遍历到根节点 i = 1。通过调用down(i)函数，确保从下到上的每个节点都符合小根堆的性质。
+
+    因为从 n/2位置开始，所有的节点都至少有一个子节点（或者说是非叶子节点）。叶子节点没有子节点，因此它们自然符合堆的性质，不需要调整。
+*/
