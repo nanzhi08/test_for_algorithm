@@ -1,0 +1,43 @@
+https://www.acwing.com/problem/content/840/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+const int N = 100010;
+int h[N],heap_size;  //h[N]是所要建立的堆，size表示堆中的元素个数
+int n,m;
+
+//因为要从小到大输出前m小的数，所以选择建立小根堆，然后根据小根堆的性质每次输出根节点即可
+//此时建立小根堆就需要用到down()函数
+void down(int k){
+    int t=k;
+    if(k*2<=heap_size && h[k*2]<h[t])
+    t=k*2;
+    if(k*2+1<=heap_size && h[k*2+1]<h[t])
+    t=k*2+1;
+    if(k!=t){
+        swap(h[k],h[t]);
+        down(t);  //继续递归，使每个父节点都要小于等于左右子节点
+    }
+}
+int main()
+{
+    cin>>n>>m;
+    
+    for(int i=1;i<=n;i++){
+        cin>>h[i];
+    }
+    heap_size=n;
+    for(int i=n/2;i;i--){
+        down(i);
+    }
+    
+    while(m--){
+        cout<<h[1]<<' ';
+        h[1]=h[heap_size];
+        heap_size--;
+        down(1);
+    }
+    
+    return 0;
+}
