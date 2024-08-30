@@ -1,0 +1,38 @@
+https://www.acwing.com/problem/content/description/843/
+
+#include<iostream>
+#include<string>
+using namespace std;
+
+typedef unsigned long long ULL;
+const int N = 100010,P=131;   //P=131或者13331，减少哈希冲突发生的概率
+ULL p[N],h[N];
+
+ULL query(int l,int r){
+    return h[r]-h[l-1]*p[r-l+1];
+}
+
+int main()
+{
+    int n,m;
+    cin>>n>>m;
+    string s;
+    cin>>s;
+    
+    p[0]=1;
+    h[0]=0;
+    for(int i=0;i<n;i++){
+        p[i+1]=p[i]*P;       //求出每个p[i]对应的P的i次幂
+        h[i+1]=h[i]*P+s[i];  //h[i+1]表示字符串s从第一个字符到第i+1个字符的哈希值
+    }
+    
+    while(m--){
+        int l1,r1,l2,r2;
+        cin>>l1>>r1>>l2>>r2;
+        if(query(l1,r1)==query(l2,r2))
+        puts("Yes");
+        else
+        puts("No");
+    }
+    return 0;
+}
